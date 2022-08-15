@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://GenericDirector.gd" type="Script" id=1]
+[ext_resource path="res://Tank.tscn" type="PackedScene" id=2]
+
+[node name="Tank" instance=ExtResource( 2 )]
+
+[node name="Director" parent="." index="5"]
+script = ExtResource( 1 )

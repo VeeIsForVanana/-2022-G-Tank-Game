@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Tank.gd" type="Script" id=1]
+[ext_resource path="res://assets/new_spriteset/Hulls_Color_A/Hull_01.png" type="Texture" id=2]
+[ext_resource path="res://assets/new_spriteset/Weapon_Color_A/Gun_01.png" type="Texture" id=3]
+[ext_resource path="res://assets/new_spriteset/Tracks/Track_1_A.png" type="Texture" id=4]
+[ext_resource path="res://assets/new_spriteset/Tracks/Track_1_B.png" type="Texture" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 122.5, 83 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 5 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "forward",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "backward",
+"speed": 12.0
+} ]
+
+[node name="Tank" type="KinematicBody2D"]
+position = Vector2( 128, 128 )
+script = ExtResource( 1 )
+default_rotation_speed = 30
+
+[node name="TankBodyCollider" type="CollisionShape2D" parent="."]
+position = Vector2( 41.5, 0 )
+shape = SubResource( 1 )
+
+[node name="RTrack" type="AnimatedSprite" parent="."]
+position = Vector2( 42, 75 )
+rotation = 1.5708
+frames = SubResource( 2 )
+animation = "forward"
+
+[node name="LTrack" type="AnimatedSprite" parent="."]
+position = Vector2( 42, -75 )
+rotation = 1.5708
+frames = SubResource( 2 )
+animation = "forward"
+
+[node name="TankSprite" type="Sprite" parent="."]
+rotation = -1.5708
+texture = ExtResource( 2 )
+offset = Vector2( 0, 46.5 )
+flip_v = true
+
+[node name="Gun" type="Node2D" parent="."]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="GunSprite" type="Sprite" parent="Gun"]
+position = Vector2( 46.5, 0 )
+rotation = -1.5708
+z_as_relative = false
+texture = ExtResource( 3 )
+flip_v = true
+
+[node name="Director" type="Node2D" parent="."]
+
+[node name="ReloadTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]

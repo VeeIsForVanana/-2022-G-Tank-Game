@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/terrain_tiles/Tiles/Ground_Tile_01_C.png" type="Texture" id=4]
 [ext_resource path="res://assets/terrain_tiles/Tiles/Ground_Tile_02_B.png" type="Texture" id=5]
 [ext_resource path="res://assets/terrain_tiles/Tiles/Ground_Tile_02_C.png" type="Texture" id=6]
-[ext_resource path="res://EnvironmentTileMap.gd" type="Script" id=7]
+[ext_resource path="res://Environment.gd" type="Script" id=7]
 [ext_resource path="res://assets/terrain_tiles/Hedges/Hedge_B_00.png" type="Texture" id=8]
 
 [sub_resource type="TileSet" id=1]
@@ -145,7 +145,7 @@ points = PoolVector2Array( 224, 0, 256, 0, 256, 32, 224, 32 )
 0/region = Rect2( 0, 0, 1024, 1024 )
 0/tile_mode = 1
 0/autotile/bitmask_mode = 0
-0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 10485855, Vector2( 0, 1 ), 10616921, Vector2( 0, 2 ), 2228697, Vector2( 0, 3 ), 325, Vector2( 1, 0 ), 11010071, Vector2( 1, 1 ), 11141136, Vector2( 1, 2 ), 2752976, Vector2( 2, 0 ), 8913207, Vector2( 2, 1 ), 9044276, Vector2( 2, 2 ), 655860, Vector2( 3, 0 ), 11141137, Vector2( 3, 1 ), 11141392, Vector2( 3, 2 ), 11141200, Vector2( 3, 3 ), 11141140 ]
+0/autotile/bitmask_flags = [ Vector2( 0, 0 ), 69, Vector2( 0, 1 ), 65, Vector2( 0, 2 ), 321, Vector2( 0, 3 ), 325, Vector2( 1, 0 ), 5, Vector2( 1, 2 ), 320, Vector2( 2, 0 ), 261, Vector2( 2, 1 ), 260, Vector2( 2, 2 ), 324, Vector2( 3, 0 ), 1, Vector2( 3, 1 ), 256, Vector2( 3, 2 ), 64, Vector2( 3, 3 ), 4 ]
 0/autotile/icon_coordinate = Vector2( 1, 1 )
 0/autotile/tile_size = Vector2( 256, 256 )
 0/autotile/spacing = 0
@@ -247,15 +247,15 @@ points = PoolVector2Array( 224, 0, 256, 0, 256, 32, 224, 32 )
 } ]
 0/z_index = 0
 
-[node name="TileCore" type="Node2D"]
+[node name="Environment" type="Node2D"]
+script = ExtResource( 7 )
 
 [node name="EnvironmentTileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
 cell_size = Vector2( 256, 256 )
 format = 1
-script = ExtResource( 7 )
 
-[node name="WallTileMap" type="TileMap" parent="."]
+[node name="BlockerTileMap" type="TileMap" parent="."]
 tile_set = SubResource( 2 )
 cell_size = Vector2( 256, 256 )
 format = 1

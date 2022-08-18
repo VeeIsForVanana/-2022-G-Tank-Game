@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Tank.tscn" type="PackedScene" id=1]
+[ext_resource path="res://BaseEnemyDirector.gd" type="Script" id=2]
+
+[node name="Tank" instance=ExtResource( 1 )]
+
+[node name="Director" parent="." index="5"]
+script = ExtResource( 2 )
+
+[node name="EnemyNavAgent" type="NavigationAgent2D" parent="Director" index="0"]
+avoidance_enabled = true

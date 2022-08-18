@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+enum {PLAYER, NEUTRAL, HOSTILE}
+
 export var starting_health = 10
 export var default_speed = 15
 export var default_rotation_speed = 20
@@ -47,7 +49,7 @@ func _ready():
 	reload_timer.wait_time = reload_time
 	reload_timer.start()
 	affiliation = director.affiliation
-	
+	set_group()
 
 
 # Called for each frame, delta stands for change in time
@@ -67,6 +69,18 @@ func _process(delta):
 	if health <= 0:
 		commit_die()
 
+
+# Handles the initial setting of affiliation group
+func set_group():
+	var group : String
+	match affiliation:
+		PLAYER:
+			group = "player"
+		NEUTRAL:
+			group = "neutral"
+		HOSTILE:
+			group = "hostile"
+	add_to_group(group)
 
 # Handles change in angle of the tank
 func handle_rotation():

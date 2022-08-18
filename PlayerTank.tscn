@@ -12,7 +12,7 @@ script = ExtResource( 1 )
 
 [node name="PlayerCamera" type="Camera2D" parent="Director" index="0"]
 current = true
-zoom = Vector2( 2, 2 )
+zoom = Vector2( 3, 3 )
 script = ExtResource( 3 )
 
 [node name="CursorControl" type="Node" parent="Director" index="1"]

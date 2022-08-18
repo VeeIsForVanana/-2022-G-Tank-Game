@@ -1,3 +1,4 @@
+tool
 extends Node2D
 
 
@@ -5,13 +6,14 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
-# Measures world size in tiles
-export var world_x = 20
-export var world_y = 20
+onready var environment_tiles = $EnvironmentTileMap
+onready var blocker_tiles = $BlockerTileMap
+onready var environment_rng = RandomNumberGenerator.new()
 
-var environment_tiles : TileMap
-var blocker_tiles : TileMap
-var environment_rng : RandomNumberGenerator 
+# Measures world size in tiles
+var not_ready = true
+export var world_x = 20 setget setWorldX
+export var world_y = 20 setget setWorldY
 
 # An array of dictionaries containing Vector2's 
 # indexed "start" and "end" for start and end of box respectively
@@ -19,11 +21,26 @@ var walled_boxes = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	environment_tiles = $EnvironmentTileMap
-	blocker_tiles = $BlockerTileMap
-	environment_rng = RandomNumberGenerator.new()
 	environment_rng.randomize()
 	set_up_environment(1)
+	not_ready = false
+
+
+func setWorldX(value):
+	world_x = value
+	if not_ready:
+		return
+	print_debug("setting world x")
+	set_up_environment(1)
+	
+
+func setWorldY(value):
+	world_y = value
+	if not_ready:
+		return
+	print_debug("setting world y")
+	set_up_environment(1)
+	world_y = value
 
 
 # Loops through all floor tiles to set up initial conditions

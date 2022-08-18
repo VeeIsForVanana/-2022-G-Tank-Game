@@ -1,6 +1,6 @@
 extends "res://GenericDirector.gd"
 
-var previous_target_location : Vector2
+var previous_m_target_location : Vector2
 
 var movement_target : Vector2	# Location of final destination
 var path_target : Vector2		# Location of movement target along path to destination
@@ -24,8 +24,12 @@ func _process(delta):
 		return
 	target_tank = known_enemy_tanks[0]
 	handle_targeting_object(target_tank)
+	movement_target = target_tank.global_position
 	handle_fire_order()
-	previous_target_location = target
+	update_navigation()
+	handle_navigation()
+	movement = handle_movement()
+	print(nav_agent.is_target_reachable())
 	pass
 
 
@@ -44,7 +48,22 @@ func handle_fire_order():
 	else:
 		fire_order = false
 
-# Handles obtaining movement target
-func handle_navigation():
+# Handles updating path target based on changing movement_target
+func update_navigation():
+	if not nav_agent.is_target_reachable() or nav_agent.is_target_reached():
+		return
 	nav_agent.set_target_location(movement_target)
 	pass
+	
+
+# Handles obtaining new waypoints for navigation and ending further navigation
+func handle_navigation():
+	# if nav_agent.distance_to_target() <= 1:
+	#	path_target = global_position
+	path_target = nav_agent.get_next_location()
+
+
+# Handles movement orders (forward, backward, left turn, right turn)
+func handle_movement():
+	var local_path_position = to_local(path_target)
+	return movement

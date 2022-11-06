@@ -9,12 +9,15 @@ script/source = "tool
 extends Node2D
 
 
-onready var environmentNode = $Environment
+onready var environment_node = $Environment
+onready var enemy_tank = $Tank
+onready var tank_nav_agent = $Tank/Director/EnemyNavAgent
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	environmentNode.set_up_environment(1)
+	environment_node.set_up_environment(1)
+	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

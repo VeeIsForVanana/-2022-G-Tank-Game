@@ -24,12 +24,11 @@ func _process(delta):
 		return
 	target_tank = known_enemy_tanks[0]
 	handle_targeting_object(target_tank)
-	movement_target = target_tank.global_position
+	movement_target = target_tank.position
 	handle_fire_order()
 	update_navigation()
 	handle_navigation()
 	movement = handle_movement()
-	print(nav_agent.is_target_reachable())
 	pass
 
 
@@ -43,7 +42,6 @@ func handle_targeting_object(target_node : Node2D):
 # then restoring fire order to false
 func handle_fire_order():
 	if tank.aimed and tank.reloaded:
-		print("Issuing fire order!")
 		fire_order = true
 	else:
 		fire_order = false
@@ -67,3 +65,8 @@ func handle_navigation():
 func handle_movement():
 	var local_path_position = to_local(path_target)
 	return movement
+	
+
+func can_find_target():
+	print(movement_target)
+	print(nav_agent.is_target_reachable())
